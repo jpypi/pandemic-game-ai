@@ -61,7 +61,7 @@ class City:
         for color, value in self.diseases.items():
             if value > 3:
                 self.diseases[color] = 3
-                self.GenerateOutBreak('blue', city_list)
+                self.GenerateOutBreak(color, city_list)
 
     def GenerateOutBreak(self, color, city_list, player_list):
         self.outbreaked = True
