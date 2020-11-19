@@ -6,15 +6,26 @@ class Player:
 
         self.position_id = 0
         self.card_list = []
-        self.stored_card = None
+        self.stored_card = []
 
     @property
     def city_cards(self):
         return filter(lambda card: card.kind == "city", self.card_list)
 
+    @property
+    def event_cards(self):
+        return filter(lambda card: card.kind == "event", self.card_list)
+
+    def HasEventCard(self, card_name):
+        for c in p.event_cards:
+            if c.name == card_name:
+                return True
+
+        return False
+
     def ShowCharacter(self, city_list):
         print("----------")
-        print(self.name + " is the " + self.role + " and is in " + city_list[self.position_id].name)
+        print(f"{self.name} is the {self.role} and is in {city_list[self.position_id].name}")
         self.ShowHand()
 
     def ShowHand(self):
@@ -158,7 +169,7 @@ class Player:
         if friend.position_id == self.position_id:
             if friend.role == 'Researcher':
                 for c in friend.card_list:
-                    if c.type == 'city':
+                    if c.kidn == 'city':
                         return True
             else:
                 for c in friend.card_list:
@@ -166,20 +177,22 @@ class Player:
                         return True
             if self.role == 'Researcher':
                 for c in self.card_list:
-                    if c.type == 'city':
+                    if c.kidn == 'city':
                         return True
             else:
                 for c in self.card_list:
                     if c.ID == self.position_id:
                         return True
+
         return False
 
     def ContingencySpecialGrab(self, player_discard_pile):
         if self.role != 'Contingency Planner':
             return False
         for card in player_discard_pile:
-            if card.type == 'event':
+            if card.kind == 'event':
                 return True
+
         return False
 
     def DispatcherControl(self):
@@ -192,65 +205,56 @@ class Player:
         for p in player_list:
             if p.role == 'Contingency Planner':
                 if len(p.stored_card) > 0:
-                    if p.stored_card.type == 'Forecast':
+                    if p.stored_card.kind == 'Forecast':
                         return True
-            for c in p.card_list:
-                if c.type == 'event':
-                    if c.name == 'Forecast':
-                        return True
+            if p.HasEventCard('Forecast'):
+                return True
+
         return False
 
     def AirliftChoice(self,player_list):
         for p in player_list:
             if p.role == 'Contingency Planner':
                 if len(p.stored_card) > 0:
-                    if p.stored_card.type == 'Airlift':
+                    if p.stored_card.kind == 'Airlift':
                         return True
-            for c in p.card_list:
-                if c.type == 'event':
-                    if c.name == 'Airlift':
-                        return True
+            if p.HasEventCard('Airlift'):
+                return True
+
         return False
 
     def QuietNightChoice(self,player_list):
         for p in player_list:
             if p.role == 'Contingency Planner':
                 if len(p.stored_card) > 0:
-                    if p.stored_card.type == 'Quiet Night':
+                    if p.stored_card.kind == 'Quiet Night':
                         return True
-            for c in p.card_list:
-                if c.type == 'event':
-                    if c.name == 'Quiet Night':
-                        return True
+            if p.HasEventCard('Quiet Night'):
+                return True
+
         return False
 
     def GovernmentGrantChoice(self,player_list):
         for p in player_list:
             if p.role == 'Contingency Planner':
                 if len(p.stored_card) > 0:
-                    if p.stored_card.type == 'Government Grant':
+                    if p.stored_card.kind == 'Government Grant':
                         return True
-            for c in p.card_list:
-                if c.type == 'event':
-                    if c.name == 'Government Grant':
-                        return True
+            if p.HasEventCard('Government Grant'):
+                return True
+
         return False
 
     def ResilientPopChoice(self,player_list):
         for p in player_list:
             if p.role == 'Contingency Planner':
                 if len(p.stored_card) > 0:
-                    if p.stored_card.type == 'Resilient Population':
+                    if p.stored_card.kind == 'Resilient Population':
                         return True
-            for c in p.card_list:
-                if c.type == 'event':
-                    if c.name == 'Resilient Population':
-                        return True
-        return False
+            if p.HasEventCard('Resilient Population'):
+                return True
 
-    def AddTwoCards(self, card_A, card_B):
-        self.card_list.append(card_A)
-        self.card_list.append(card_B)
+        return False
 
     def AddCard(self, card):
         self.card_list.append(card)
