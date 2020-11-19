@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import csv
-import random
 
 from player import Player
 from city import City
+from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
 
 
 class Graph:
@@ -35,87 +35,12 @@ class Graph:
             print (item)
 
 
-class PlayerCardDeck:
-    def __init__(self, city_cards):
-        self.cards = []
-        self.CreatePlayerDeck(city_cards)
-
-    def CreatePlayerDeck(self, cities):
-        self.cards.append(PlayerCard('event', 'Airlift', 9999))
-        self.cards.append(PlayerCard('event', 'Forecast', 9999))
-        self.cards.append(PlayerCard('event', 'Resilient Population', 9999))
-        self.cards.append(PlayerCard('event', 'Government Grant', 9999))
-        self.cards.append(PlayerCard('event', 'Quiet Night', 9999))
-        self.cards.extend(cities)
-        self.cards = ShuffleDeck(self.cards)
-
-    def AddEpidemicCards(self, number_of_epidemics):
-        sliced_decks = SliceDeck(self.cards, number_of_epidemics)
-        player_cards = []  # reset the player deck now
-        for k in sliced_decks:
-            k.append(PlayerCard('Epidemic', 'Oh Shit', 1000))
-            k = ShuffleDeck(k)
-            # stack back together
-            player_cards.append(k)
-        self.cards = player_cards
-
-    def DrawPlayerStartingCards(self, n_players):
-        if n_players == 3:
-            sum = 9
-        else:
-            sum = 8
-
-        output = []
-        each = int(sum/n_players)
-        for p in range(n_players):
-            x = []
-            for e in range(each):
-                x.append(self.DrawCard())
-            output.append(x)
-
-        return output
-
-    def DrawCard(self):
-        return self.cards.pop(0)
-
-
-class PlayerCard:
-    def __init__(self, type, name, ID):
-        self.type = type
-        self.name = name
-        self.ID = ID - 1
-
-    def __str__(self):
-        return f"PlayerCard: {self.type} - {self.name}"
-
-
 def CheckForOutbreaks(city_list):
-    sum = 0
+    total = 0
     for city in city_list:
         if city.outbreaked:
-            sum += 1
+            total += 1
             city.outbreaked = False
-
-
-def ShuffleDeck(deck):
-    random.shuffle(deck)
-    return deck
-
-
-def SliceDeck(input, size):
-    input_size = len(input)
-    slice_size = int(input_size / size)
-    remain = input_size % size
-    result = []
-    #iterator = iter(input)
-    for i in range(size):
-        result.append([])
-        for j in range(slice_size):
-            result[i].append(input.pop(0))
-        if remain:
-            result[i].append(input.pop(0))
-            remain -= 1
-    return result
 
 
 def SpawnEpidemic(infected_discard, infection_cards, epidemics_occured, city_list, players):
@@ -126,7 +51,7 @@ def SpawnEpidemic(infected_discard, infection_cards, epidemics_occured, city_lis
     city_list[bottom_card.ID].AddDrawnInfection(city_list,3,players)
     infected_discard.append(bottom_card)
     #reshuffle discard
-    infected_discard = ShuffleDeck(infected_discard)
+    ShuffleDeck(infected_discard)
     #stick back on top
     #need to return basically everything?
     return infected_discard.extend(infection_cards)
@@ -169,15 +94,15 @@ if __name__ == "__main__" :
                  'Quarantine Specialist',
                  'Scientist',
                  'Contingency Planner']
-    roles_shuffled = ShuffleDeck(role_deck)
-    print(roles_shuffled)
+    ShuffleDeck(role_deck)
+    print(role_deck)
     city_cards = []
     for city in city_list:
         city_cards.append(PlayerCard('city',city.name,int(city.ID)))
 
 
     infection_cards = city_cards
-    infection_cards = ShuffleDeck(infection_cards)
+    ShuffleDeck(infection_cards)
 
     player_cards = PlayerCardDeck(city_cards)
     player_card_discard = []
@@ -212,10 +137,10 @@ if __name__ == "__main__" :
 
     #Set number of players
     num_of_players = 4
-    player_list.append(Player(roles_shuffled[0], "Kevin", 0))
-    player_list.append(Player(roles_shuffled[2], "Megan", 1))
-    player_list.append(Player(roles_shuffled[1], "Phil", 2))
-    player_list.append(Player(roles_shuffled[3], "Jesse", 3))
+    player_list.append(Player(role_deck[0], "Kevin", 0))
+    player_list.append(Player(role_deck[2], "Megan", 1))
+    player_list.append(Player(role_deck[1], "Phil", 2))
+    player_list.append(Player(role_deck[3], "Jesse", 3))
 
     #Draw Player Cards
     start_cards = player_cards.DrawPlayerStartingCards(num_of_players)
