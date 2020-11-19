@@ -15,7 +15,7 @@ class Player:
 
     def ShowHand(self):
         for c in self.card_list:
-            c.PrintCard()
+            print(c)
 
     def ShowTeamActions(self, players):
         if self.ForecastChoice(players):
@@ -76,12 +76,11 @@ class Player:
             print("Not a dispatcher")
 
     def GetNumberOfCardsOfColor(self, cities, color):
-        sum = 0
+        total = 0
         for card in self.card_list:
-            if card.type == 'city':
-                if cities[card.ID].color == color:
-                    sum += 1
-        return sum
+            if card.type == 'city' and cities[card.ID].color == color:
+                total += 1
+        return total
 
     def FerryActionChoices(self, map):
         nid = map.GetNeighbors(self.position_id)
@@ -105,8 +104,7 @@ class Player:
                     return True
         else:
             for card in self.card_list:
-                if card.type == 'city':
-                    if card.ID == self.position_id:
+                if card.type == 'city' and card.ID == self.position_id:
                         return True
         return False
 
@@ -123,9 +121,8 @@ class Player:
                 return True
             else:
                 for card in self.card_list:
-                    if card.type == 'city':
-                        if card.ID == self.position_id:
-                            return True
+                    if card.type == 'city' and card.ID == self.position_id:
+                        return True
         return False
 
     def TreatDiseaseChoices(self, cities):

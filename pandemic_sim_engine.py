@@ -85,8 +85,8 @@ class PlayerCard:
         self.name = name
         self.ID = ID - 1
 
-    def PrintCard(self):
-        print("PlayerCard:" + self.type + " - " + self.name)
+    def __str__(self):
+        return f"PlayerCard: {self.type} - {self.name}"
 
 
 def CheckForOutbreaks(city_list):
