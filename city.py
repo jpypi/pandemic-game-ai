@@ -1,17 +1,17 @@
 class City:
-    def __init__(self, name, color, ID, neighbors):
+    def __init__(self, ID, name, color, neighbors):
+        self.ID = ID
         self.name = name
         self.color = color
-        #disease list goes Blue, Yellow, Black, Red
         self.diseases = {
-                "blue": 0,
-                "yellow": 0,
-                "black": 0,
-                "red": 0}
-        self.ID = int(ID)
-        self.research_center = False
+            "blue": 0,
+            "yellow": 0,
+            "black": 0,
+            "red": 0
+        }
         self.neighbors = neighbors
 
+        self.research_center = False
         self.outbreaked = False
 
     def ShowDiseaseStatus(self):

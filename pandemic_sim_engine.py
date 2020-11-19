@@ -141,8 +141,9 @@ if __name__ == "__main__" :
         cityreader = csv.reader(csvfile)
         #todo insert try/catch
         for row in cityreader:
-            n = row[3:len(row)]
-            city_list.append(City(row[1],row[2],row[0],n))
+            neighbors = row[3:]
+            ID, name, color = int(row[0]), row[1], row[2]
+            city_list.append(City(ID, name, color, neighbors))
         #print(row[1])
 
     #Step 2: construct the graph
