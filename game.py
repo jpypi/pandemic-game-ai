@@ -27,6 +27,13 @@ class Game:
         self.infection_cards = []
         self.infection_discard = []
 
+        #set initial infection rate
+        self.occurred_epidemics = 0
+        self.infection_rate_options = [2,2,2,3,3,4,4]
+        self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
+        self.outbreak_number = 0 #initialize to 0
+
+        #Players
         self.number_of_players = n_players
         self.players = []
         #set difficulty
@@ -54,6 +61,24 @@ class Game:
     def play(self):
         # TODO: Loop over turns
         pass
+
+    def draw_infections(self):
+        for k in range(self.infection_rate):
+            infect = self.infection_cards.pop(0)
+            self.cities[infect.ID].AddDrawnInfection(self.cities,1,self.players)
+            self.infection_discard.append(infect)
+
+    def spawn_epidemic(self):
+        #Part 1: upgrade infection rate
+        self.occurred_epidemics += 1
+        self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
+        #Part 2: Cause Infection
+        bottom_card = self.infection_cards.pop(-1)
+        self.cities[bottom_card.ID].AddDrawnInfection(self.cities,3,self.players)
+        self.infection_discard.append(bottom_card)
+        #Part 3: reshuffle and place on top
+        ShuffleDeck(self.infection_discard)
+        self.infection_cards = self.infection_discard.extend(self.infection_cards)
 
     def generate_card_decks(self):
         #role deck
