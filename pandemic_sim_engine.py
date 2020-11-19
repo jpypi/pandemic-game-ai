@@ -62,6 +62,7 @@ if __name__ == "__main__" :
     #main area
     test_game = Game(4,'hard')
 
+    test_game.print_game_state()
     """
     #Step 2: construct the graph
     map = Graph(len(city_list))

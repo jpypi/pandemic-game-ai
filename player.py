@@ -97,8 +97,8 @@ class Player:
                 total += 1
         return total
 
-    def FerryActionChoices(self):
-        nid = self.get_neighbors()
+    def FerryActionChoices(self, cities):
+        nid = cities[self.position_id].get_neighbors()
         return nid
 
     def ShuttleActionChoices(self, cities):
@@ -169,7 +169,7 @@ class Player:
         if friend.position_id == self.position_id:
             if friend.role == 'Researcher':
                 for c in friend.card_list:
-                    if c.kidn == 'city':
+                    if c.kind == 'city':
                         return True
             else:
                 for c in friend.card_list:
@@ -177,7 +177,7 @@ class Player:
                         return True
             if self.role == 'Researcher':
                 for c in self.card_list:
-                    if c.kidn == 'city':
+                    if c.kind == 'city':
                         return True
             else:
                 for c in self.card_list:

@@ -12,7 +12,9 @@ def import_cities():
         cityreader = csv.reader(csvfile)
         # todo insert try/catch
         for row in cityreader:
-            neighbors = row[3:]
+            neighbors = []
+            for k in range(3,len(row)):
+                neighbors.append(int(row[k]))
             ID, name, color = int(row[0]), row[1], row[2]
             city_list.append(City(ID, name, color, neighbors))
     return city_list
@@ -104,6 +106,7 @@ class Game:
         for p in self.players:
             p.ShowCharacter(self.cities)
             p.ShowActionOptions(self.cities,self.players,self.player_discard)
+        print("================")
 
     def generate_card_decks(self):
         #role deck
