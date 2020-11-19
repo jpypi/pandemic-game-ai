@@ -134,24 +134,18 @@ class Player:
         return sum(cities[self.position_id].diseases.values())
 
     def CureDiseaseChoice(self, cities):
-        results = [False, False, False, False]
-        value = 4
+        curable = []
+        required = 4
         if self.role == 'Scientist':
-            value = 3
+            required = 3
+
         if cities[self.position_id].research_center:
-            bc = self.GetNumberOfCardsOfColor(cities,'blue')
-            yc = self.GetNumberOfCardsOfColor(cities, 'yellow')
-            kc = self.GetNumberOfCardsOfColor(cities, 'black')
-            rc = self.GetNumberOfCardsOfColor(cities, 'red')
-            if bc > value:
-                results[0] = True
-            if yc > value:
-                results[1] = True
-            if kc > value:
-                results[2] = True
-            if rc > value:
-                results[3] = True
-        return results
+            for color in ['blue', 'yellow', 'black', 'red']:
+                count = self.GetNumberOfCardsOfColor(cities, color)
+                if count > required:
+                    curable.append(color)
+
+        return curable
 
     def ShareAllKnowledgeChoice(self, playerlist):
         x = []
