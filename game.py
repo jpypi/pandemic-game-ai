@@ -4,6 +4,7 @@ from player import Player
 from city import City
 from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
 from copy import deepcopy
+from actions import check_action, perform_action, Share, Clean, Cure, Build, DiscardMove, FreeMove
 
 def import_cities():
     city_list = []

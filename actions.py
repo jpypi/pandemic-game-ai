@@ -4,6 +4,7 @@ from city import City
 class IAction:
     def __init__(self, kind):
         self.kind = kind
+        #probably not needed anymore
 
 class FreeMove(IAction):
     def __init__(self, destination, method):
