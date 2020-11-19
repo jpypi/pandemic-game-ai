@@ -28,6 +28,7 @@ class Game:
         self.infection_discard = []
 
         #set initial infection rate
+        self.game_lost = False
         self.occurred_epidemics = 0
         self.infection_rate_options = [2,2,2,3,3,4,4]
         self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
@@ -61,6 +62,15 @@ class Game:
     def play(self):
         # TODO: Loop over turns
         pass
+
+    def draw_playercards(self, player):
+        #draw 2 cards
+        if self.player_cards.number_of_cards_left > 2:
+            player.AddCard(self.player_cards.DrawCard())
+            player.AddCard(self.player_cards.DrawCard())
+        else:
+            self.game_lost = True
+            return
 
     def draw_infections(self):
         for k in range(self.infection_rate):
