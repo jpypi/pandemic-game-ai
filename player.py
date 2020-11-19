@@ -1,12 +1,12 @@
 class Player:
-    def __init__(self, role, name, id):
+    def __init__(self, role, name, ID):
         self.role = role
-        self.id = id
+        self.ID = ID
         self.name = name
 
         self.position_id = 0
         self.card_list = []
-        self.stored_card
+        self.stored_card = None
 
     def ShowCharacter(self, city_list):
         print("----------")
@@ -79,7 +79,7 @@ class Player:
         sum = 0
         for card in self.card_list:
             if card.type == 'city':
-                if cities[card.id].color == color:
+                if cities[card.ID].color == color:
                     sum += 1
         return sum
 
@@ -106,15 +106,15 @@ class Player:
         else:
             for card in self.card_list:
                 if card.type == 'city':
-                    if card.id == self.position_id:
+                    if card.ID == self.position_id:
                         return True
         return False
 
     def DirectFlightChoices(self):
         targets = []
         for card in self.card_list:
-            if card.type == 'city' and card.id != self.position_id:
-                targets.append(card.id)
+            if card.type == 'city' and card.ID != self.position_id:
+                targets.append(card.ID)
         return targets
 
     def BuildResearchStationChoice(self, cities):
@@ -124,7 +124,7 @@ class Player:
             else:
                 for card in self.card_list:
                     if card.type == 'city':
-                        if card.id == self.position_id:
+                        if card.ID == self.position_id:
                             return True
         return False
 
@@ -171,7 +171,7 @@ class Player:
                         return True
             else:
                 for c in friend.card_list:
-                    if c.id == friend.position_id:
+                    if c.ID == friend.position_id:
                         return True
             if self.role == 'Researcher':
                 for c in self.card_list:
@@ -179,7 +179,7 @@ class Player:
                         return True
             else:
                 for c in self.card_list:
-                    if c.id == self.position_id:
+                    if c.ID == self.position_id:
                         return True
         return False
 
