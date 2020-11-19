@@ -1,24 +1,22 @@
 import csv
+from copy import deepcopy
 
 from player import Player
 from city import City
 from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
-from copy import deepcopy
 from actions import check_action, perform_action, Share, Clean, Cure, Build, DiscardMove, FreeMove
 
-def import_cities():
+
+def import_cities(filename):
     city_list = []
-    # Step 1: import all the cities from csv
-    fn = 'pandemic_cities.csv'
-    with open(fn) as csvfile:
+    with open(filename) as csvfile:
         cityreader = csv.reader(csvfile)
-        # todo insert try/catch
+        # TODO: wrap in try/catch
         for row in cityreader:
-            neighbors = []
-            for k in range(3,len(row)):
-                neighbors.append(int(row[k]))
+            neighbors = [int(n) for n in row[3:]]
             ID, name, color = int(row[0]), row[1], row[2]
             city_list.append(City(ID, name, color, neighbors))
+
     return city_list
 
 
@@ -62,9 +60,8 @@ class Game:
     def infection_rate(self):
         return self.infection_rate_options[self.occurred_epidemics]
 
-
     def initialize_game(self):
-        self.cities = import_cities() #need to grab the correct reference
+        self.cities = import_cities("pandemic_cities.csv") #need to grab the correct reference
         self.generate_card_decks()
         self.spawn_infection()
         self.spawn_characters()
