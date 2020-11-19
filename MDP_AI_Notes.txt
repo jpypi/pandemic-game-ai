@@ -1,0 +1,28 @@
+For any end state; there needs to be a "reward"
+Rewards:
+	an outbreak occurs: -10
+	lose the game: -100
+	# of color cubes left: - sum[ H(blue), H(red), H(yellow), H(black) ]
+		Logistic function H('color')
+		x0 = 12
+		k = 1
+		L = 25
+	number of cures: F
+		Logistic function F
+		x0 = 2
+		k = 1
+		L = 1000
+		
+Probabilities Desired
+	Probability of an outbreak in City X in turns Y
+		we are interested in the probability that City X will have 4 cubes of any color Z in Y turn
+	Probability of game over in Y turns 
+		we are interested in the probability that we run out of disease cubes of any color Z or we get 8 outbreaks or we run out of turns 
+	Probability of drawing City X in turns Y
+		what is the chance of City X in turns Y being drawn from the infection pile (top)
+	Probability of drawing epidemic infector card of City X in turns Y
+		This is only for drawing the bottom card of the deck that gets 3 infections
+	Probability of drawing epidemic card in turns Y
+	Probability of getting 1 disease cube of color Z in City X
+	Probability of cure in Y turns
+	
