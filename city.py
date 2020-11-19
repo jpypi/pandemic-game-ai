@@ -67,3 +67,7 @@ class City:
         self.outbreaked = True
         for n in self.neighbors:
             city_list[n].AddInfectionOfColor(self, color, city_list, player_list)
+
+    def get_neighbors(self):
+        return self.neighbors
+

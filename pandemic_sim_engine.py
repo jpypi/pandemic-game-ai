@@ -5,6 +5,7 @@ import csv
 from player import Player
 from city import City
 from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
+from game import Game
 
 
 class Graph:
@@ -59,18 +60,9 @@ def SpawnEpidemic(infected_discard, infection_cards, epidemics_occured, city_lis
 
 if __name__ == "__main__" :
     #main area
-    city_list = []
-    #Step 1: import all the cities from csv
-    fn = 'pandemic_cities.csv'
-    with open(fn) as csvfile:
-        cityreader = csv.reader(csvfile)
-        #todo insert try/catch
-        for row in cityreader:
-            neighbors = row[3:]
-            ID, name, color = int(row[0]), row[1], row[2]
-            city_list.append(City(ID, name, color, neighbors))
-        #print(row[1])
+    test_game = Game(4,'hard')
 
+    """
     #Step 2: construct the graph
     map = Graph(len(city_list))
     city_id_to_name = {}
@@ -85,80 +77,10 @@ if __name__ == "__main__" :
 
     print("adjaceny list for storing graph")
     #map.Display_AdjList()
-
-    #Initialize Game
-    role_deck = ['Medic',
-                 'Researcher',
-                 'Operations Expert',
-                 'Dispatcher',
-                 'Quarantine Specialist',
-                 'Scientist',
-                 'Contingency Planner']
-    ShuffleDeck(role_deck)
-    print(role_deck)
-    city_cards = []
-    for city in city_list:
-        city_cards.append(PlayerCard('city', city.name, city.ID))
+    """
 
 
-    infection_cards = city_cards
-    ShuffleDeck(infection_cards)
-
-    player_cards = PlayerCardDeck(city_cards)
-    player_card_discard = []
-    infection_discard = []
-    player_list = []
-
-    #Set initial infections -> clean this section up and make it its own function to initialize
-    for k in range(9):
-        print(city_list[infection_cards[k].ID].name)
-    #set of 3s
-    city_list[infection_cards[0].ID].AddDrawnInfection(city_list, 3, player_list)
-    city_list[infection_cards[1].ID].AddDrawnInfection(city_list, 3, player_list)
-    city_list[infection_cards[2].ID].AddDrawnInfection(city_list, 3, player_list)
-    #set of 2s
-    city_list[infection_cards[3].ID].AddDrawnInfection(city_list, 2, player_list)
-    city_list[infection_cards[4].ID].AddDrawnInfection(city_list, 2, player_list)
-    city_list[infection_cards[5].ID].AddDrawnInfection(city_list, 2, player_list)
-    #set of 1s
-    city_list[infection_cards[6].ID].AddDrawnInfection(city_list, 1, player_list)
-    city_list[infection_cards[7].ID].AddDrawnInfection(city_list, 1, player_list)
-    city_list[infection_cards[8].ID].AddDrawnInfection(city_list, 1, player_list)
-    #discard these to discard pile
-    infection_discard.append(infection_cards.pop(0))
-    infection_discard.append(infection_cards.pop(1))
-    infection_discard.append(infection_cards.pop(2))
-    infection_discard.append(infection_cards.pop(3))
-    infection_discard.append(infection_cards.pop(4))
-    infection_discard.append(infection_cards.pop(5))
-    infection_discard.append(infection_cards.pop(6))
-    infection_discard.append(infection_cards.pop(7))
-    infection_discard.append(infection_cards.pop(8))
-
-    #Set number of players
-    num_of_players = 4
-    player_list.append(Player(role_deck[0], "Kevin", 0))
-    player_list.append(Player(role_deck[2], "Megan", 1))
-    player_list.append(Player(role_deck[1], "Phil", 2))
-    player_list.append(Player(role_deck[3], "Jesse", 3))
-
-    #Draw Player Cards
-    start_cards = player_cards.DrawPlayerStartingCards(num_of_players)
-    c = 0
-    for p in player_list:
-        for k in range(len(start_cards[c])):
-            p.AddCard(start_cards[c][k])
-        c += 1
-
-    #Add in epidemic Cards
-    num_of_epidemics = 6 #between 4 and 6
-    epidemics_occured = 0
-
-    player_cards.AddEpidemicCards(num_of_epidemics)
-
-    #Add research station to atlanta
-    city_list[0].research_center = True
-
+    """
     #Display which cities have infection and research stations
     print("====================")
     print("Diseased Cities List")
@@ -177,9 +99,4 @@ if __name__ == "__main__" :
     print("====================")
     #--------
     #Print a demo players options
-
-    #Example Round
-    #Player does action
-    #player draws 2 cards
-    #player draws 2 infections
-    #player increments outbreak counter
+    """
