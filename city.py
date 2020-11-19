@@ -3,27 +3,24 @@ class City:
         self.name = name
         self.color = color
         #disease list goes Blue, Yellow, Black, Red
-        self.diseases = [0,0,0,0] #better way than list?
-        self.disease_colors = ["blue","yellow","black","red"];
+        self.diseases = {
+                "blue": 0,
+                "yellow": 0,
+                "black": 0,
+                "red": 0}
         self.ID = int(ID)
         self.research_center = False
         self.neighbors = neighbors
 
         self.outbreaked = False
 
-    def SumDiseaseCubes(self):
-        sum = 0
-        for k in range(len(self.diseases)):
-            sum += self.diseases[k]
-        return sum
-
     def ShowDiseaseStatus(self):
-        disease_value = self.SumDiseaseCubes()
+        disease_value = sum(self.diseases.values())
         if disease_value > 0:
             print("-----")
-            print("City: " + self.name + "(" + str(self.ID) +")")
-            for c in range(len(self.diseases)):
-                print(self.disease_colors[c] + ": " + str(self.diseases[c]))
+            print(f"City: {self.name}({self.ID})")
+            for color, value in self.diseases.items():
+                print(f"{color}: {value}")
 
     def ShowResearchCenterStatus(self):
         if self.research_center:
@@ -49,47 +46,23 @@ class City:
     def AddDrawnInfection(self, city_list, value, player_list):
         if self.CheckIfQuarentined(player_list):
             return
-        if self.color == 'blue':
-            self.diseases[0] += value
-        elif self.color == 'red':
-            self.diseases[3] += value
-        elif self.color == 'yellow':
-            self.diseases[1] += value
-        else:
-            self.diseases[2] += value
+        self.diseases[self.color] += value
         self.CheckForOutbreak(city_list, player_list)
 
     def AddInfectionOfColor(self, color, city_list, player_list):
         if self.CheckIfQuarentined(player_list):
             return
-        if color == 'blue':
-            self.diseases[0] += 1
-        elif color == 'yellow':
-            self.diseases[1] += 1
-        elif color == 'black':
-            self.diseases[2] += 1
-        elif color == 'red':
-            self.diseases[3] += 1
+        self.diseases[color] += 1
         self.CheckForOutbreak(city_list, player_list)
 
     def CheckForOutbreak(self, city_list, player_list):
-        if self.outbreaked:
-            return
-        if self.CheckIfQuarentined(player_list):
+        if self.outbreaked or self.CheckIfQuarentined(player_list):
             return
 
-        if self.diseases[0] > 3:
-            self.diseases[0] = 3
-            GenerateOutBreak(self,'blue', city_list)
-        elif self.diseases[1] > 3:
-            self.diseases[1] = 3
-            GenerateOutBreak(self, 'yellow', city_list)
-        elif self.diseases[2] > 3:
-            self.diseases[2] = 3
-            GenerateOutBreak(self, 'black', city_list)
-        elif self.diseases[3] > 3:
-            self.diseases[3] = 3
-            GenerateOutBreak(self, 'red', city_list)
+        for color, value in self.diseases.items():
+            if value > 3:
+                self.diseases[color] = 3
+                self.GenerateOutBreak('blue', city_list)
 
     def GenerateOutBreak(self, color, city_list, player_list):
         self.outbreaked = True

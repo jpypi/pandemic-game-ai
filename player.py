@@ -129,12 +129,8 @@ class Player:
         return False
 
     def TreatDiseaseChoices(self, cities):
-        dcubes = cities[self.position_id].diseases
-        sum = 0
-        for dc in dcubes:
-            sum += int(dc)
         #right now we are returning the number of available actions;
-        return sum
+        return sum(cities[self.position_id].diseases.values())
 
     def CureDiseaseChoice(self, cities):
         results = [False, False, False, False]
