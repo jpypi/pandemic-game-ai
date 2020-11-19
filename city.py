@@ -27,7 +27,7 @@ class City:
             print("-----")
             print("City: " + self.name + "(" + str(self.ID) + ")")
 
-    def print_info(self):
+    def PrintInfo(self):
         #insert some print statements here
         print("City " + self.name + " : " + self.color)
 

@@ -34,6 +34,7 @@ class Graph:
         for item in self.adjlist.items() :
             print (item)
 
+
 class PlayerCardDeck:
     def __init__(self, city_cards):
         self.cards = []
@@ -160,7 +161,13 @@ if __name__ == "__main__" :
     #map.Display_AdjList()
 
     #Initialize Game
-    role_deck = ['Medic','Researcher','Operations Expert','Dispatcher','Quarantine Specialist','Scientist','Contingency Planner']
+    role_deck = ['Medic',
+                 'Researcher',
+                 'Operations Expert',
+                 'Dispatcher',
+                 'Quarantine Specialist',
+                 'Scientist',
+                 'Contingency Planner']
     roles_shuffled = ShuffleDeck(role_deck)
     print(roles_shuffled)
     city_cards = []
