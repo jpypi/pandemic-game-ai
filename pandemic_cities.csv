@@ -1,0 +1,48 @@
+1,Atlanta,blue,2,13,12
+2,Washington,blue,3,13,1,6
+3,New York,blue,2,6,10,4
+4,London,blue,3,10,8,5
+5,Essen,blue,7,9,8,4
+6,Montreal,blue,2,3,12
+7,St. Petersburg,blue,5,39,37
+8,Paris,blue,4,5,10,9,45
+9,Milan,blue,5,8,39
+10,Madrid,blue,4,8,3,45,19
+11,San Francisco,blue,25,14,12,36
+12,Chicago,blue,1,6,14,11
+13,Miama,yellow,1,2,16,15
+14,Los Angeles,yellow,12,11,16,33
+15,Bogota,yellow,17,16,19,23,13
+16,Mexico City,yellow,13,14,15,17
+17,Lima,yellow,16,15,18
+18,Santiago,yellow,17
+19,Sao Paulo,yellow,10,15,23,22
+20,Johannesburg,yellow,24,21
+21,Khartoum,yellow,20,24,22,44
+22,Lagos,yellow,21,19,24
+23,Buenos Aires,yellow,15,19
+24,kinshasa,yellow,21,20,22
+25,Tokyo,red,11,27,26,30
+26,Osaka,red,31,25
+27,Seoul,red,29,30,25
+28,Hong Kong,red,30,31,35,34,36,46
+29,Beijing,red,30,27
+30,Shanghai,red,29,27,25,31,28
+31,Tripei,red,26,30,28,36
+32,Jakarta,red,47,35,34,33
+33,Sydney,red,36,32,14
+34,Ho Chi Min City,red,36,35,32,28
+35,Bangkok,red,46,47,28,34,32
+36,Manila,red,11,31,28,34,33
+37,Moscow,black,7,39,40
+38,Baghdad,black,40,43,48,44,39
+39,Istanbul,black,7,9,45,44,38,37
+40,Tehran,black,37,38,43,42
+41,Mumbai,black,42,47,43
+42,Delhi,black,46,47,41,40,43
+43,Karachi,black,40,42,41,38,48
+44,Cairo,black,48,38,39,45,21
+45,Algiers,black,10,8,39,44
+46,Kolkata,black,28,35,47,42
+47,Chennai,black,41,42,46,35,32
+48,Riyadh,black,44,38,43
