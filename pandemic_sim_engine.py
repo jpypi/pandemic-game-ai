@@ -95,7 +95,7 @@ if __name__ == "__main__" :
     #display player cards and roles
     for p in player_list:
         p.ShowCharacter(city_list)
-        p.ShowActionOptions(city_list, map, player_list, None)
+        p.ShowActionOptions(city_list, player_list, None)
     print("====================")
     #--------
     #Print a demo players options

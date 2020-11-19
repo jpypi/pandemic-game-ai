@@ -90,6 +90,21 @@ class Game:
         ShuffleDeck(self.infection_discard)
         self.infection_cards = self.infection_discard.extend(self.infection_cards)
 
+    def print_game_state(self):
+        print("================")
+        print("Diseased Cities List")
+        for c in self.cities:
+            c.ShowDiseaseStatus()
+        print("================")
+        print("Research Center List")
+        for c in self.cities:
+            c.ShowResearchCenterStatus()
+        print("================")
+        print("Players")
+        for p in self.players:
+            p.ShowCharacter(self.cities)
+            p.ShowActionOptions(self.cities,self.players,self.player_discard)
+
     def generate_card_decks(self):
         #role deck
         role_deck = ['Medic',

@@ -44,10 +44,10 @@ class Player:
         if self.ResilientPopChoice(players):
             print("Can use Resilient Population")
 
-    def ShowActionOptions(self, city_list, world_map, players, player_discard):
+    def ShowActionOptions(self, city_list, players, player_discard):
         print("Showcasing all actions for " + self.name)
         #ferry action
-        ferry_opts = self.FerryActionChoices(world_map)
+        ferry_opts = self.FerryActionChoices(city_list)
         for k in range(len(ferry_opts)):
             print("Ferry to " + city_list[ferry_opts[k]].name)
         #shuttle action
@@ -97,8 +97,8 @@ class Player:
                 total += 1
         return total
 
-    def FerryActionChoices(self, map):
-        nid = map.GetNeighbors(self.position_id)
+    def FerryActionChoices(self):
+        nid = self.get_neighbors()
         return nid
 
     def ShuttleActionChoices(self, cities):
