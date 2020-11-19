@@ -36,28 +36,6 @@ class Graph:
             print (item)
 
 
-def CheckForOutbreaks(city_list):
-    total = 0
-    for city in city_list:
-        if city.outbreaked:
-            total += 1
-            city.outbreaked = False
-
-
-def SpawnEpidemic(infected_discard, infection_cards, epidemics_occured, city_list, players):
-    epidemics_occured += 1
-    infection_options = [2,2,2,3,3,4,4]
-    infection_rate = infection_options[epidemics_occured]
-    bottom_card = infection_cards.pop(-1)
-    city_list[bottom_card.ID].AddDrawnInfection(city_list,3,players)
-    infected_discard.append(bottom_card)
-    #reshuffle discard
-    ShuffleDeck(infected_discard)
-    #stick back on top
-    #need to return basically everything?
-    return infected_discard.extend(infection_cards)
-
-
 if __name__ == "__main__" :
     #main area
     test_game = Game(4,'hard')

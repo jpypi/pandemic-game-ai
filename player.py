@@ -8,6 +8,8 @@ class Player:
         self.card_list = []
         self.stored_card = []
 
+        self.current_action_count = 0
+
     @property
     def city_cards(self):
         return filter(lambda card: card.kind == "city", self.card_list)
@@ -22,6 +24,12 @@ class Player:
                 return True
 
         return False
+
+    def reset_action_counter(self):
+        self.current_action_count = 0
+
+    def increment_action_counter(self):
+        self.current_action_count += 1
 
     def ShowCharacter(self, city_list):
         print("----------")

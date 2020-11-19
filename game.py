@@ -3,6 +3,7 @@ import csv
 from player import Player
 from city import City
 from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
+from copy import deepcopy
 
 def import_cities():
     city_list = []
@@ -32,8 +33,11 @@ class Game:
         self.round_number = 0
         self.turn_number = 0
 
+        self.cured_diseases = {"blue": False, "yellow":False, "black":False, "red":False}
+
         #set initial infection rate
         self.game_lost = False
+        self.game_win = False
         self.occurred_epidemics = 0
         self.infection_rate_options = [2,2,2,3,3,4,4]
         self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
@@ -68,25 +72,40 @@ class Game:
         playerTurn = self.which_player_turn()
         #Run the AI to make decisions
         if self.AI is not None:
-            actions = self.AI.SetActionOptions(playerTurn,self)
+            game_copy = deepcopy(self)
+            actions = self.AI.SetActionOptions(playerTurn,game_copy)
         #perform action
-        self.make_action(actions,playerTurn)
+        self.do_action(actions,playerTurn)
         #draw cards
         self.draw_playercards(playerTurn)
         #draw infections
         self.draw_infections()
+        #reset action counter for next round
+        playerTurn.reset_action_counter()
+        self.turn_number += 1
 
     def play(self):
         # TODO: Loop over turns
-        pass
+        #check game state; lose or win
+        while not self.game_lost or self.game_win:
+            self.update()
+        if self.game_lost:
+            print("CORONAVIRUS HAS WON! on turn " + str(self.turn_number))
+        else:
+            print("DR. FAUCI HAS WON! on turn " + str(self.turn_number))
 
-    def make_action(self, list_of_actions, player):
+    def do_action(self, list_of_actions, player):
         #list of actions (order dependent) for player
-        pass
+        for act in list_of_actions:
+            if check_action(act,player):
+                perform_action(act,player,self)
 
     def which_player_turn(self):
         pi = self.turn_number % self.number_of_players
         return self.players[pi]
+
+    def discard_playercard(self, player, index):
+        self.player_discard.append(player.card_list.pop(index))
 
     def draw_playercards(self, player):
         #draw 2 cards
@@ -183,3 +202,21 @@ class Game:
     def finalize(self):
         self.player_cards.AddEpidemicCards(self.num_of_epidemics)
         self.cities[0].research_center = True
+
+    def check_for_outbreaks(self):
+        total = 0
+        for city in self.cities:
+            if city.outbreaked:
+                total += 1
+                city.outbreaked = False
+
+    def check_for_lose_state(self):
+        #8 outbreaks, more than 24 disease cubes of one color, no cards left
+        pass
+
+    def check_for_win_state(self):
+        #all four diseases cured
+        pass
+
+    def share_card(self, playerDst, playerSrc, card_index):
+        playerDst.card_list.append(playerSrc.card_list.pop(card_index))

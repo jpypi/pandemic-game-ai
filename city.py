@@ -71,3 +71,6 @@ class City:
     def get_neighbors(self):
         return self.neighbors
 
+    def clear_disease_cubes(self, amount, color):
+        self.diseases[color] -= amount
+        #assume you can't get to negative?
