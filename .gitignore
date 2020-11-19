@@ -1,2 +1,9 @@
+# Python
 __pycache__
 *.pyc
+
+# Vim
+*.swp
+
+# MacOS
+.DS_Store
