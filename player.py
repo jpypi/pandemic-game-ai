@@ -8,6 +8,10 @@ class Player:
         self.card_list = []
         self.stored_card = None
 
+    @property
+    def city_cards(self):
+        return filter(lambda card: card.kind == "city", self.card_list)
+
     def ShowCharacter(self, city_list):
         print("----------")
         print(self.name + " is the " + self.role + " and is in " + city_list[self.position_id].name)
@@ -77,8 +81,8 @@ class Player:
 
     def GetNumberOfCardsOfColor(self, cities, color):
         total = 0
-        for card in self.card_list:
-            if card.type == 'city' and cities[card.ID].color == color:
+        for card in self.city_cards:
+            if cities[card.ID].color == color:
                 total += 1
         return total
 
@@ -100,18 +104,18 @@ class Player:
     def CharterFlightChoices(self, cities):
         if self.role == 'Operations Expert' and cities[self.position_id].research_center:
             for card in self.card_list:
-                if card.type == 'city':
+                if card.kind == 'city':
                     return True
         else:
-            for card in self.card_list:
-                if card.type == 'city' and card.ID == self.position_id:
+            for card in self.city_cards:
+                if card.ID == self.position_id:
                         return True
         return False
 
     def DirectFlightChoices(self):
         targets = []
-        for card in self.card_list:
-            if card.type == 'city' and card.ID != self.position_id:
+        for card in self.city_cards:
+            if card.ID != self.position_id:
                 targets.append(card.ID)
         return targets
 
@@ -120,8 +124,8 @@ class Player:
             if self.role == 'Operations Expert':
                 return True
             else:
-                for card in self.card_list:
-                    if card.type == 'city' and card.ID == self.position_id:
+                for card in self.city_cards:
+                    if card.ID == self.position_id:
                         return True
         return False
 

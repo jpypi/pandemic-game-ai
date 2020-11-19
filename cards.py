@@ -46,13 +46,13 @@ class PlayerCardDeck:
 
 
 class PlayerCard:
-    def __init__(self, type, name, ID):
-        self.type = type
+    def __init__(self, kind, name, ID):
+        self.kind = kind
         self.name = name
         self.ID = ID - 1
 
     def __str__(self):
-        return f"PlayerCard: {self.type} - {self.name}"
+        return f"PlayerCard: {self.kind} - {self.name}"
 
 
 def ShuffleDeck(deck):

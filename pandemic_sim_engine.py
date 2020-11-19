@@ -98,7 +98,7 @@ if __name__ == "__main__" :
     print(role_deck)
     city_cards = []
     for city in city_list:
-        city_cards.append(PlayerCard('city',city.name,int(city.ID)))
+        city_cards.append(PlayerCard('city', city.name, city.ID))
 
 
     infection_cards = city_cards
