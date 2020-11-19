@@ -1,0 +1,82 @@
+Actions:
+Drive
+	edge connection between cities
+Direct flight 
+	discard a city card to move to the city named on card
+Charter Flight
+	discard city card that matches the city you are in to move to any city
+Shuttle Flight
+	move from a city with a research station to any other city that has a research station
+build a research station
+	discard the city card that mtches the city you are in to place a station there
+treat diseas
+	remove 1 cube from teh city you are in; if this color is cured, remove all cubes of that color
+share knowledge
+	give the card that matches teh cit you are in to another player, or take that card from another player; player must be in same city with you
+DIscover a cure
+	at any research station, discard 5 city cards of same disease color to cure that disease
+	
+Epidemic Card
+	move infection rate 1 space (2,2,2,3,3,4,4)
+	infect (draw buttom card and put 3 cubes on that city 
+	intensify (shuffle the cards in the infect discard and put them on top of the deck)
+
+Event cards
+	Airlift -> move any 1 pawn to any city 
+	One quiet night -> skip infect cities step
+	gov grant -> add 1 research station to any city
+	resilient population -> remove any 1 card in the infection discard pile from teh game
+	forecast -> draw, look at, and arrange the top 6 cards of the infection deck
+	
+Roles
+		Quarantine specialist -> prevent outbreaks and cube placements in the city you are in and all cities connected to it
+	dispatcher -> move another players pawn as if it were yours; as an action move any pawn to a city with another pawn
+		scientist -> cure disease with only 4 cards (instead of 5)
+		medic -> remove all cubes of one color when doing treat disease; automatically remove cubes of cured diseases from the city you are in (and prevent placement)
+		op expert -> build a research station in the city you are in (no card needed); once per turn as an action, move from a research station to any city by discarding any city card
+		Researcher -> you may give any 1 of your city cards when you share knowledge. A player who shares knowledge with you on tehir turn can take any 1 of your city cards
+		Contingency planner -> as an action, take any discard event card and store it (limit 1); when you play the stored event card, remove it from the game
+
+Win Condition
+	Cured all 4 diseases
+Lose Condition
+	Outbreak (8x)
+	Not enough disease cubes to place
+	not enough player cards (run out of turns)
+	
+Max 6 research stations on map
+
+24 cubes in 4 colors 
+
+4 cure markers (nothing, cured, eradicated)
+
+hand limit 7 cards (immediate)
+
+Starting
+shuffle infection deck
+flip over 3 -> put 3 disease cubes of the matching color on each of these cities
+flip over 3 -> put 2 disease on these
+flip over 3 -> put 1 disease (total of 18 cubes)
+Place these 9 cards into the infection discard pile; other cards into the infection deck
+
+2 players; 4 cards
+3 players; 3 cards
+4 players; 2 cards
+all players start at atlanta
+shuffle player cards (minus epidemics) and give to each player according to list above
+
+choose 4,5,or 6 epidemic cards (easy,standard,hard)
+divide remaining player cards into face down piles as equal in size; # of piles = # epidemic cards
+shuffle 1 epidemic card into each pile (face down); stack these piles to form the player deck; placing smaller piles ont eh bottom
+
+outbreak
+	if a place has 3 cubes and tries to add 1 more; an outbreak occurs
+	an outbreak triggers 1 cube in each nieghbor of the host city color; this can trigger additional outbreaks
+	only 1 outbreak per city in a turn 
+	chain reaction; do not add a cube to cities that already had an outbreak 
+
+Turns
+	4 actions (up to)
+	draw 2 player cards
+	draw X infection card
+	
