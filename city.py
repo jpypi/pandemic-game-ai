@@ -25,11 +25,10 @@ class City:
     def ShowResearchCenterStatus(self):
         if self.research_center:
             print("-----")
-            print("City: " + self.name + "(" + str(self.ID) + ")")
+            print(f"City: {self.name}({self.ID})")
 
     def PrintInfo(self):
-        #insert some print statements here
-        print("City " + self.name + " : " + self.color)
+        print(f"City {self.name} : {self.color}")
 
     def CheckIfQuarentined(self, players):
         for p in players:
