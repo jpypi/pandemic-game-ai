@@ -93,5 +93,5 @@ class Share(IAction):
 def check_action(action, player):
     return action.check(player)
 
-def perform_action(action, player, cities):
-    action.perform(player, cities)
+def perform_action(action, player, game):
+    action.perform(player, game)
