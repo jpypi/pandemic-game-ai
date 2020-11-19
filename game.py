@@ -41,7 +41,6 @@ class Game:
         self.game_win = False
         self.occurred_epidemics = 0
         self.infection_rate_options = [2,2,2,3,3,4,4]
-        self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
         self.outbreak_number = 0 #initialize to 0
 
         self.AI = AI_Decider
@@ -58,6 +57,10 @@ class Game:
             self.num_of_epidemics = 6
 
         self.initialize_game()
+
+    @property
+    def infection_rate(self):
+        return self.infection_rate_options[self.occurred_epidemics]
 
 
     def initialize_game(self):
@@ -136,7 +139,6 @@ class Game:
     def spawn_epidemic(self):
         #Part 1: upgrade infection rate
         self.occurred_epidemics += 1
-        self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
         #Part 2: Cause Infection
         bottom_card = self.infection_cards.pop(-1)
         self.cities[bottom_card.ID].AddDrawnInfection(self.cities,3,self.players)
