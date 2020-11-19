@@ -21,7 +21,7 @@ def import_cities():
 
 
 class Game:
-    def __init__(self, n_players,difficulty):
+    def __init__(self, n_players,difficulty, AI_Decider):
         self.cities = []
         self.roles = []
         self.player_cards = []
@@ -29,12 +29,17 @@ class Game:
         self.infection_cards = []
         self.infection_discard = []
 
+        self.round_number = 0
+        self.turn_number = 0
+
         #set initial infection rate
         self.game_lost = False
         self.occurred_epidemics = 0
         self.infection_rate_options = [2,2,2,3,3,4,4]
         self.infection_rate = self.infection_rate_options[self.occurred_epidemics]
         self.outbreak_number = 0 #initialize to 0
+
+        self.AI = AI_Decider
 
         #Players
         self.number_of_players = n_players
@@ -59,17 +64,45 @@ class Game:
 
     def update(self):
         # TODO: Implement a single turn
-        pass
+        #which player turn:
+        playerTurn = self.which_player_turn()
+        #Run the AI to make decisions
+        if self.AI is not None:
+            actions = self.AI.SetActionOptions(playerTurn,self)
+        #perform action
+        self.make_action(actions,playerTurn)
+        #draw cards
+        self.draw_playercards(playerTurn)
+        #draw infections
+        self.draw_infections()
 
     def play(self):
         # TODO: Loop over turns
         pass
 
+    def make_action(self, list_of_actions, player):
+        #list of actions (order dependent) for player
+        pass
+
+    def which_player_turn(self):
+        pi = self.turn_number % self.number_of_players
+        return self.players[pi]
+
     def draw_playercards(self, player):
         #draw 2 cards
         if self.player_cards.number_of_cards_left > 2:
-            player.AddCard(self.player_cards.DrawCard())
-            player.AddCard(self.player_cards.DrawCard())
+            #card 1
+            c = self.player_cards.DrawCard()
+            if c.kind == 'Epidemic':
+                self.spawn_epidemic()
+            else:
+                player.AddCard(c)
+            #card 2
+            c = self.player_cards.DrawCard()
+            if c.kind == 'Epidemic':
+                self.spawn_epidemic()
+            else:
+                player.AddCard(c)
         else:
             self.game_lost = True
             return
