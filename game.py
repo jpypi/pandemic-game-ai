@@ -84,12 +84,17 @@ class Game:
         #reset action counter for next round
         playerTurn.reset_action_counter()
         self.turn_number += 1
+        #Check for outbreaks
+        self.check_for_outbreaks()
+
 
     def play(self):
         # TODO: Loop over turns
         #check game state; lose or win
         while not self.game_lost or self.game_win:
             self.update()
+            self.check_for_lose_state()
+            self.check_for_win_state()
         if self.game_lost:
             print("CORONAVIRUS HAS WON! on turn " + str(self.turn_number))
         else:
@@ -208,14 +213,34 @@ class Game:
             if city.outbreaked:
                 total += 1
                 city.outbreaked = False
+        self.outbreak_number += total
+
+    def check_cube_limit(self):
+        sum_blue = 0
+        sum_red = 0
+        sum_yellow = 0
+        sum_black = 0
+        for city in self.cities:
+            sum_blue += city.disease['blue']
+            sum_black += city.disease['black']
+            sum_yellow += city.disease['yellow']
+            sum_red += city.disease['red]']
+        if sum_blue > 24 or sum_red > 24 or sum_yellow > 24 or sum_black > 24:
+            return True
+        else:
+            return False
 
     def check_for_lose_state(self):
         #8 outbreaks, more than 24 disease cubes of one color, no cards left
-        pass
+        if self.outbreak_number >= 8:
+            return True
+        elif self.check_cube_limit():
+            return True
+        #no cards left is checked when you draw 2 new cards for player
 
     def check_for_win_state(self):
         #all four diseases cured
-        pass
+        return all(self.cured_diseases.values())
 
     def share_card(self, playerDst, playerSrc, card_index):
         playerDst.card_list.append(playerSrc.card_list.pop(card_index))

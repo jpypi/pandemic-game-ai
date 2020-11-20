@@ -44,6 +44,8 @@ class PlayerCardDeck:
     def DrawCard(self):
         return self.cards.pop(0)
 
+    def remaining_cards(self):
+        return len(self.cards)
 
 class PlayerCard:
     def __init__(self, kind, name, ID):
