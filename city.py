@@ -72,5 +72,4 @@ class City:
         return self.neighbors
 
     def clear_disease_cubes(self, amount, color):
-        self.diseases[color] -= amount
-        #assume you can't get to negative?
+        self.diseases[color] = max(0, self.diseases[color] - amount)
