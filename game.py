@@ -183,8 +183,7 @@ class Game:
     def spawn_infection(self):
         for k in range(3):
             for i in range(3):
-                index = k*3 + i
-                self.cities[self.infection_cards[index].ID].AddDrawnInfection(self.cities,3-k,self.players)
+                self.cities[self.infection_cards[0].ID].AddDrawnInfection(self.cities,3-k,self.players)
                 self.infection_discard.append(self.infection_cards.pop(0))
 
     def spawn_characters(self):
