@@ -21,7 +21,7 @@ def import_cities(filename):
 
 
 class Game:
-    def __init__(self, n_players,difficulty, AI_Decider):
+    def __init__(self, n_players, difficulty, AI_Decider):
         self.cities = []
         self.roles = []
         self.player_cards = []
@@ -32,7 +32,12 @@ class Game:
         self.round_number = 0
         self.turn_number = 0
 
-        self.cured_diseases = {"blue": False, "yellow":False, "black":False, "red":False}
+        self.cured_diseases = {
+            "blue": False,
+            "yellow": False,
+            "black": False,
+            "red": False
+        }
 
         #set initial infection rate
         self.game_lost = False
@@ -87,18 +92,15 @@ class Game:
         #Check for outbreaks
         self.check_for_outbreaks()
 
-
     def play(self):
-        # TODO: Loop over turns
-        #check game state; lose or win
-        while not self.game_lost or self.game_win:
+        # Main game loop
+        while self.check_win() is None:
             self.update()
-            self.check_for_lose_state()
-            self.check_for_win_state()
-        if self.game_lost:
-            print("CORONAVIRUS HAS WON! on turn " + str(self.turn_number))
-        else:
+
+        if self.check_win():
             print("DR. FAUCI HAS WON! on turn " + str(self.turn_number))
+        else:
+            print("CORONAVIRUS HAS WON! on turn " + str(self.turn_number))
 
     def do_action(self, list_of_actions, player):
         #list of actions (order dependent) for player
@@ -197,11 +199,9 @@ class Game:
             self.players.append(Player(self.roles[k],random_names[k],k))
         #Draw cards for the players
         start_cards = self.player_cards.DrawPlayerStartingCards(self.number_of_players)
-        c = 0
-        for p in self.players:
+        for c, p in enumerate(self.players):
             for k in range(len(start_cards[c])):
                 p.AddCard(start_cards[c][k])
-            c += 1
 
     def finalize(self):
         self.player_cards.AddEpidemicCards(self.num_of_epidemics)
@@ -216,6 +216,10 @@ class Game:
         self.outbreak_number += total
 
     def check_cube_limit(self):
+        """
+        return: True if all of the disease cubes for any color have been placed
+        """
+
         sum_blue = 0
         sum_red = 0
         sum_yellow = 0
@@ -230,17 +234,24 @@ class Game:
         else:
             return False
 
-    def check_for_lose_state(self):
-        #8 outbreaks, more than 24 disease cubes of one color, no cards left
-        if self.outbreak_number >= 8:
-            return True
-        elif self.check_cube_limit():
-            return True
+    def check_win(self):
+        """
+        A loss occurs if any of the following occurs:
+            - 8 outbreaks
+            - more than 24 disease cubes of one color
+            - no cards left
+
+        A win occurs if all four diseases are cured
+        """
+        if self.outbreak_number >= 8 or self.check_cube_limit():
+            return False
         #no cards left is checked when you draw 2 new cards for player
 
-    def check_for_win_state(self):
         #all four diseases cured
-        return all(self.cured_diseases.values())
+        if all(self.cured_diseases.values()):
+            return True
+
+        return None
 
     def share_card(self, playerDst, playerSrc, card_index):
         playerDst.card_list.append(playerSrc.card_list.pop(card_index))
