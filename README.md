@@ -1,5 +1,3 @@
-# pandemic-game-ai
-Pandemic board game engine for writing AI/NPCs against
+# Pandemic Boardgame Engine for AIs
 
-HOW DO I USE?
-You don't, it uses you!
+Pandemic board game engine for writing AI/NPCs against
