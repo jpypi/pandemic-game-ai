@@ -1,0 +1,40 @@
+Tier List of Characters (swatza opinion)
+Operations Expert: S
+	This character has the ability to do charter flights on demand and can freely setup research stations. This is critical for quickly getting teammates into an area, allows for
+	optimal placement.
+Medic: A
+	While amazing and a great to have; this character doesn't really shine until a cure has been dropped. The triple removal isn't that important since you require a cure to eradicate 
+	disease rather than just clearing all ties in the game. Removing 1 tile is sufficient to reduce the threat of an outbreak. 
+Contingency Planner: C
+	By far the worst of the choices, the planner abilities rely 100% on RNG. While the event cards are extremely powerful and giving the opportunity to use each twice is fantastic, the
+	limitation is that if no event cards are drawn early game or the ones needed are at the bottom of the deck, entire games can be won or lost with only 1 or 2 cards being drawn. Additionally
+	since those cards are most powerfully used out of turn sequence and a limit of 1 in the hand at a time; it significantly reduces this characters effectiveness in larger team games.
+Researcher: B
+	Another less than great option in the roles. The researcher is fantastic for swapping cards, however it is one to give away cards rather than recieve cards. If the ability was mutual
+	in both directions this would be S class. However it relies a little too much on RNG to have drawn the cards and the card limit prevents too much stacking. 
+Scientist: B
+	While more powerful in general terms than the researcher because of the reduction of 1 (and many games its getting that last card to the right person) can save the hassle of swapping
+	cards between characters. This character pairs really well with the researcher as a way to quickly have two players focusing on cure development. However this ability isn't as good 
+	as some of the others because it doesn't provide this ability to everyone on the team so you still have to get the cards to the scientist.
+Quarantine Specialist: A
+	A solid choice that when used appropriately can be a life saver (if only people could quarantine in life as well as in game), however it is difficult to play as you have to constantly 
+	be placing oneself in a disaster scenario ahead meaning you don't often have the ability to be sharing cards to develop cures. It is also partially RNG luck as if it all the infections
+	are localized than really great but if they are across the map it loses some of its power. 
+Dispatcher: S
+	The last one on the list and worthy of S tier as well. The dispatcher has the ability to shuttle characters to each other on a needed basis and is preparing players for position. While
+	slightly more situational (other character dependent) than the operations expert, I believe this is a must have to achieve a successful game. 
+
+Difficulty Predictions
+The following table is a prediction based on a limited number of games played and understanding the rules and behaviors of the game. 
+On average
+				Easy		Standard		Hard
+2 players		80%			70%				60%
+3 players		90%			80%				70%
+4 players		70%			60%				50%
+
+Reasoning: 
+3 players start off with 1 additional card already drawn (9 compared to 8) and 2 players each have 4 cards meaning they are very close to getting that first cure on the board. On Hard
+there is an expected value of drawing an epidemic every 9 cards; 5 turns which means that with 4 players everyone only goes once before getting an epidemic. The likelihood of having
+enough cards in a single player's hand to cure is very small as only 1 player would have had (best case) close to enough cards on their start of turn. This is why 4 players is the
+hardest; even though you have more damage control capability you also take longer to get cures out. I believe 3 is the optimal number of players because by end of round 1 (everyone did 1
+turn) the first player would have atleast had 5 cards since the start. 

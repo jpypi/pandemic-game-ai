@@ -13,16 +13,73 @@ Rewards:
 		k = 1
 		L = 1000
 		
-Probabilities Desired
-	Probability of an outbreak in City X in turns Y
-		we are interested in the probability that City X will have 4 cubes of any color Z in Y turn
-	Probability of game over in Y turns 
-		we are interested in the probability that we run out of disease cubes of any color Z or we get 8 outbreaks or we run out of turns 
-	Probability of drawing City X in turns Y
-		what is the chance of City X in turns Y being drawn from the infection pile (top)
-	Probability of drawing epidemic infector card of City X in turns Y
-		This is only for drawing the bottom card of the deck that gets 3 infections
-	Probability of drawing epidemic card in turns Y
-	Probability of getting 1 disease cube of color Z in City X
-	Probability of cure in Y turns
+	=====================
+	Probabilities Desired
+	=====================
+
+A = 1 if not in discard; else 0 -> this only holds for the current turn
+	This assumes uniform distribution of cards which only holds if it is unknown
+P(drawing_city_x | unknown) = 1/infection * A
+
+P(drawing_city_x | unknown, epidemic) = 0 until infection_discard/rate > turn_count; then its back to 1/infection * A
+
+P(drawing_city_x | discard) = 1/(infection_discard+1) * P(drawing_epidemic)
+
+Stack of 6 Cards: X is position 4 at fixed rate2
+p(drawing_city_x) = 1/6
+p(drawing_city_x | card_1 != x) = ? (this is not 1/5 -> its slightly greater than 1/5)
+	
+
+p(drawing_city_x | card_3) = ?
+p(drawing_city_x | card_4) = ?
+
+p(drawing_city_x | card_5) = ?
+p(drawing_city_x | card_6) = 1
+
+P(drawing_city_x | 3 turns) = 
+P(drawing_city_x | 2 turns) = 
+P(drawing_city_x | 1 turns) = 
+	
+Probability of an outbreak in City X in turns Y
+	we are interested in the probability that City X will have 4 cubes of any color Z in Y turn
+Probability of game over in Y turns 
+	we are interested in the probability that we run out of disease cubes of any color Z or we get 8 outbreaks or we run out of turns 
+Probability of drawing City X in turns Y
+	what is the chance of City X in turns Y being drawn from the infection pile (top)
+	if it is currently in the discard pile
+		P(dcx) = 0 at that given turn
+		P(dcx) = 1/infection_discard * P(eic)
+	P(dcx) = 
+	
+Probability of drawing epidemic infector card of City X in turns Y
+	This is only for drawing the bottom card of the deck that gets 3 infections
+	If a card has been drawn at any time before; 
+		P(eic) = 0 -> this is an approximation but should hold fine 
+	else:
+		P(eic) = 1/Cards_remaining * 1/(cards_remaining-2) * 1/(cards_remaining-4) * ... * 1/(cards_remaining - 2*(Y-1))
+		
+Probability of drawing epidemic card in turns Y
+	On average 9, 10 or 12 cards on average depending on difficulty or (5,5,6 turns)
+	X = starting_card_size (48+5-8+D) or (48+5-9+D)
+	slice_size = X/D
+	max target = #_of_eps * slice_size (18)
+	current_cards_drawn % cards_between
+	
+	-----
+	if X < slice_size && has_drawn_for_slice
+		P(epi) = 0
+	else 
+		P(epi) = 2 / (slice_size - X)
+	-----
+	
+	for instance no epidemics drawn since start and its card 7 and 8; the probability would be 1/3
+	however if the card was drawn as 3; there is a chance that not until card 18 it would be drawn be 0
+
+
+Probability of getting 1 disease cube of color Z in City X
+	if z == natural color
+		P(obx) = sum_multi(P(obn) for each neighbor of x of color Z)
+		p(dc, z, x) = P(dcx) * P(obx)
+
+Probability of cure in Y turns
 	
