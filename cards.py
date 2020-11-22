@@ -20,13 +20,13 @@ class PlayerCardDeck:
 
     def AddEpidemicCards(self, number_of_epidemics):
         sliced_decks = SliceDeck(self.cards, number_of_epidemics)
-        player_cards = []  # reset the player deck now
+        temp_deck = []  # reset the player deck now
         for k in sliced_decks:
             k.append(PlayerCard('Epidemic', 'Oh Shit', 1000))
             ShuffleDeck(k)
             # stack back together
-            player_cards.append(k)
-        self.cards = player_cards
+            temp_deck.extend(k)
+        self.cards = temp_deck
 
     def DrawPlayerStartingCards(self, n_players):
         if n_players == 3:

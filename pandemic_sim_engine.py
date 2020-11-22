@@ -6,6 +6,7 @@ from player import Player
 from city import City
 from cards import PlayerCard, PlayerCardDeck, ShuffleDeck
 from game import Game
+import helper_ai
 
 
 class Graph:
@@ -38,9 +39,12 @@ class Graph:
 
 if __name__ == "__main__" :
     #main area
-    test_game = Game(4,'hard')
+    test_game = Game(4,'hard',None)
 
     test_game.print_game_state()
+
+    print("testing probability distribution")
+    print(helper_ai.calculate_drawing_infection_city_card(test_game,'Atlanta'))
     """
     #Step 2: construct the graph
     map = Graph(len(city_list))

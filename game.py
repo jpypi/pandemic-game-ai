@@ -47,6 +47,8 @@ class Game:
         self.outbreak_number = 0 #initialize to 0
 
         self.AI = AI_Decider
+        #Add two data trackers
+        self.starting_num_of_player_cards = 48+5
 
         #Players
         self.number_of_players = n_players
@@ -186,6 +188,7 @@ class Game:
         #infection cards
         self.infection_cards = city_cards
         ShuffleDeck(self.infection_cards)
+        print("Number of player cards in generate cards " + str(self.player_cards.remaining_cards()) + " == " + '53')
 
     def spawn_infection(self):
         for k in range(3):
@@ -206,6 +209,8 @@ class Game:
     def finalize(self):
         self.player_cards.AddEpidemicCards(self.num_of_epidemics)
         self.cities[0].research_center = True
+        #this number tracks remaining cards disregarding turn 0 draw
+        self.starting_num_of_player_cards = self.player_cards.remaining_cards()
 
     def check_for_outbreaks(self):
         total = 0
