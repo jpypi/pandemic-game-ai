@@ -21,6 +21,7 @@ def calculate_chance_of_epidemic(game):
     if game.occurred_epidemics >= expected_epidemics:
         return 0
     else:
+        #only is ever 2 cards from player side
         a = calculate_uniform_probability_of_card_draw(rem)
         b = calculate_uniform_probability_of_card_draw(rem-1)
         return a + b
@@ -29,7 +30,6 @@ def calculate_drawing_infection_city_card(game, city):
     p_epidemic = calculate_chance_of_epidemic(game)
     print("probability of drawing epidemic is " + str(p_epidemic))
     if check_if_in_discard(game,city.name):
-        #TODO update this draw number based on severity level of infection rate
         p_card = 0
         for r in range(game.infection_rate):
             p_card += calculate_uniform_probability_of_card_draw(len(game.infection_discard) + 1 - r)
@@ -39,7 +39,7 @@ def calculate_drawing_infection_city_card(game, city):
         if check_if_has_been_drawn(game,city.name):
             p_card = 0
             for r in range(game.infection_rate):
-                pcard += calculate_uniform_probability_of_card_draw(len(game.infection_cards_restack) - r)
+                p_card += calculate_uniform_probability_of_card_draw(len(game.infection_cards_restack) - r)
             return p__not_epidemic * p_card
         else:
             if len(game.infection_cards_restack) > 0:

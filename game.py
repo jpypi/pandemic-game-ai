@@ -143,6 +143,9 @@ class Game:
             infect.has_been_drawn = True
             self.cities[infect.ID].AddDrawnInfection(self.cities,1,self.players)
             self.infection_discard.append(infect)
+            #pull out restack cards if they exist
+            if len(self.infection_cards_restack) > 0:
+                self.infection_cards.restack.pop(0)
 
     def spawn_epidemic(self):
         #Part 1: upgrade infection rate
