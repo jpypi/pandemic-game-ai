@@ -79,14 +79,14 @@ def calculate_drawing_epidemic_infection_city_card(game, city):
 def calculate_outbreak_in_city(game, city):
     #for now assume only 1 turn and no mixed color outbreaks;
     if city.disesase[city.color] == 3:
-        p_draw = calculate_drawing_infection_city_card(game, city.name)
+        p_draw = calculate_drawing_infection_city_card(game, city)
         return p_draw
     elif city.disesase[city.color] > 1:
-        p_draw = calculate_drawing_epidemic_infection_city_card(game,city.name)
+        p_draw = calculate_drawing_epidemic_infection_city_card(game,city)
         return p_draw
     else:
         #calculate the probability of drawing epidemic and then redrawing that card
-        p_epidemic = calculate_drawing_epidemic_infection_city_card(game, city.name)
+        p_epidemic = calculate_drawing_epidemic_infection_city_card(game, city)
         p_draw = 0
         for x in range(game.infection_rate):
             p_draw += calculate_uniform_probability_of_card_draw(len(game.infection_discard)+1+x)

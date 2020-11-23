@@ -44,7 +44,7 @@ if __name__ == "__main__" :
     test_game.print_game_state()
 
     print("testing probability distribution")
-    print(helper_ai.calculate_drawing_infection_city_card(test_game,'Atlanta'))
+    print(helper_ai.calculate_drawing_infection_city_card(test_game,))
 
     print("outbreak chance is " + str(helper_ai.calculate_probability_of_outbreak(test_game)))
     """

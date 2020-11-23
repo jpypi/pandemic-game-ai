@@ -23,6 +23,7 @@ def import_cities(filename):
 class Game:
     def __init__(self, n_players, difficulty, AI_Decider):
         self.cities = []
+        self.city_list = {}
         self.roles = []
         self.player_cards = []
         self.player_discard = []
@@ -70,6 +71,8 @@ class Game:
 
     def initialize_game(self):
         self.cities = import_cities("pandemic_cities.csv") #need to grab the correct reference
+        for city in self.cities:
+            self.city_list[city.name] = city
         self.generate_card_decks()
         self.spawn_infection()
         self.spawn_characters()
@@ -270,3 +273,6 @@ class Game:
 
     def share_card(self, playerDst, playerSrc, card_index):
         playerDst.card_list.append(playerSrc.card_list.pop(card_index))
+
+    def get_city_by_name(self,name):
+        return self.city_list[name]
