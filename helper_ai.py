@@ -96,4 +96,11 @@ def calculate_outbreak_in_city(game, city):
 def calculate_probability_of_outbreak(game):
     #calculate the likelihood for each city
     # TODO! add in the other non-color happenstances
+    p_x = []
+    total = 0
     for city in game.cities:
+        p = calculate_outbreak_in_city(game,city)
+        total += p
+        p_x.append(p)
+        print(city.name + " having an outbreak is " + str(p))
+    return total

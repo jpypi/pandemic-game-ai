@@ -45,6 +45,8 @@ if __name__ == "__main__" :
 
     print("testing probability distribution")
     print(helper_ai.calculate_drawing_infection_city_card(test_game,'Atlanta'))
+
+    print("outbreak chance is " + str(helper_ai.calculate_probability_of_outbreak(test_game)))
     """
     #Step 2: construct the graph
     map = Graph(len(city_list))
