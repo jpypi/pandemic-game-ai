@@ -28,6 +28,7 @@ class Game:
         self.player_discard = []
         self.infection_cards = []
         self.infection_discard = []
+        self.infection_cards_restack = [] #a subset of infection cards that track which cards are back on top that were in the discard
 
         self.round_number = 0
         self.turn_number = 0
@@ -139,6 +140,7 @@ class Game:
     def draw_infections(self):
         for k in range(self.infection_rate):
             infect = self.infection_cards.pop(0)
+            infect.has_been_drawn = True
             self.cities[infect.ID].AddDrawnInfection(self.cities,1,self.players)
             self.infection_discard.append(infect)
 
@@ -147,10 +149,13 @@ class Game:
         self.occurred_epidemics += 1
         #Part 2: Cause Infection
         bottom_card = self.infection_cards.pop(-1)
+        bottom_card.has_been_drawn = True
         self.cities[bottom_card.ID].AddDrawnInfection(self.cities,3,self.players)
         self.infection_discard.append(bottom_card)
         #Part 3: reshuffle and place on top
         ShuffleDeck(self.infection_discard)
+        #update our local tracker of which ones have been drawn and are back on top
+        self.infection_cards_restack.extend(self.infection_discard)
         self.infection_cards = self.infection_discard.extend(self.infection_cards)
 
     def print_game_state(self):
@@ -194,7 +199,9 @@ class Game:
         for k in range(3):
             for i in range(3):
                 self.cities[self.infection_cards[0].ID].AddDrawnInfection(self.cities,3-k,self.players)
-                self.infection_discard.append(self.infection_cards.pop(0))
+                cardref = self.infection_cards.pop(0)
+                cardref.has_been_drawn = True
+                self.infection_discard.append(cardref)
 
     def spawn_characters(self):
         random_names = ["Kevin","Phil","Megan","Jessica"];

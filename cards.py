@@ -52,6 +52,7 @@ class PlayerCard:
         self.kind = kind
         self.name = name
         self.ID = ID - 1
+        self.has_been_drawn = False
 
     def __str__(self):
         return f"PlayerCard: {self.kind} - {self.name}"
